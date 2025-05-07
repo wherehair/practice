@@ -1,12 +1,13 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
+import React, { useState } from "react"; // ✅ useState 꼭 import!!
 
 export default function Test() {
   const navigate = useNavigate();
+  const [image, setImage] = useState(null);
 
   const handleAnalyze = () => {
     // 분석하기 버튼 누르면 결과 페이지로 이동
-    navigate("/result");
+    navigate("/result", { state: { image } });
   };
 
   const handleBack = () => {
@@ -14,9 +15,17 @@ export default function Test() {
     navigate("/");
   };
 
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setImage(URL.createObjectURL(file)); // 미리보기용 URL 생성
+    }
+  };
+
   return (
     <div style={styles.container}>
       <header style={styles.header}>
+        <div style={styles.backIcon} onClick={() => navigate(-1)}>👈</div>
         <div
           style={{ ...styles.logo, cursor: "pointer" }}
           onClick={() => navigate("/")}
@@ -34,6 +43,15 @@ export default function Test() {
 
       <div style={styles.imageBox}>
         <p>내 탈모 사진</p>
+        <input type="file" accept="image/*" onChange={handleImageUpload} />
+        
+        {image && (
+          <img
+            src={image}
+            alt="업로드된 사진"
+            style={{ marginTop: "10px", width: "100%", borderRadius: "10px" }}
+          />
+        )}
       </div>
 
       <div style={styles.buttonRow}>
@@ -58,9 +76,14 @@ const styles = {
   header: {
     display: "flex",
     justifyContent: "space-between",
+    alignItems: "center",
     marginBottom: "20px",
   },
+  backIcon:{
+    fontSize: "35px",
+  },
   logo: {
+    fontSize: "35px",
     fontWeight: "bold",
   },
   menuIcon: {
@@ -82,7 +105,7 @@ const styles = {
   imageBox: {
     backgroundColor: "#e0e0e0",
     borderRadius: "10px",
-    height: "250px",
+    height: "auto",
     padding: "20px",
     marginBottom: "20px",
   },
