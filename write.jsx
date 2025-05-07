@@ -7,6 +7,7 @@ export default function Write() {
   return (
     <div style={styles.container}>
       <header style={styles.header}>
+        <div style={styles.backIcon} onClick={() => navigate(-1)}>👈</div>
         <div
           style={{ ...styles.logo, cursor: "pointer" }}
           onClick={() => navigate("/")}
@@ -62,9 +63,14 @@ const styles = {
   header: {
     display: "flex",
     justifyContent: "space-between",
-    marginBottom: "10px",
+    alignItems: "center",
+    marginBottom: "20px",
+  },
+  backIcon:{
+    fontSize: "35px",
   },
   logo: {
+    fontSize: "35px",
     fontWeight: "bold",
   },
   menuIcon: {
