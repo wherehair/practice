@@ -49,7 +49,7 @@ export default function Test() {
       <div style={styles.imageBox}>
         <p style={styles.img}>내 탈모 사진</p>
         <input type="file" accept="image/*" onChange={handleImageUpload} />
-        
+
         {image && (
           <img
             src={image}
@@ -103,11 +103,13 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     gap: "5px",
+    cursor: "pointer",
   },
   bar: {
     width: "30px",
     height: "4px",
     backgroundColor: "#000",
+    borderRadius: "4px",
   },
   title: {
     textAlign: "center",
@@ -127,7 +129,7 @@ const styles = {
     justifyContent: "center",
     gap: "10px",
   },
-  button: {    
+  button: {
     fontSize: "15px",
     fontWeight: "bold",
     padding: "10px 20px",
