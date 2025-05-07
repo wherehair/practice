@@ -23,14 +23,16 @@ export default function Login() {
 
       <h2 style={styles.title}>로그인</h2>
 
-      <div style={styles.form}>
-        <div style={styles.inputGroup}>
-          <label>ID</label>
-          <input type="text" />
-        </div>
-        <div style={styles.inputGroup}>
-          <label>PASSWORD</label>
-          <input type="password" />
+      <div style={styles.formWrapper}>
+        <div style={styles.formColumn}>
+          <div style={styles.formRow}>
+            <label style={styles.label}>ID</label>
+            <input type="text" style={styles.input} />
+          </div>
+          <div style={styles.formRow}>
+            <label style={styles.label}>PASSWORD</label>
+            <input type="password" style={styles.input} />
+          </div>
         </div>
         <button style={styles.loginBtn}>로그인</button>
       </div>
@@ -49,16 +51,16 @@ const styles = {
     backgroundColor: "#ccc",
     height: "100vh",
     padding: "30px",
-    boxSizing: "border-box",
     fontFamily: "sans-serif",
+    boxSizing: "border-box",
   },
   header: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: "20px",
+    marginBottom: "30px",
   },
-  backIcon:{
+  backIcon: {
     fontSize: "35px",
   },
   logo: {
@@ -79,34 +81,53 @@ const styles = {
     fontSize: "35px",
     fontWeight: "bold",
     textAlign: "center",
-    marginBottom: "30px",
+    marginBottom: "40px",
   },
-  form: {
+  formWrapper: {
     display: "flex",
-    flexDirection: "column",
+    justifyContent: "center",
     alignItems: "center",
     gap: "20px",
     marginBottom: "30px",
   },
-  inputGroup: {
+  formColumn: {
     display: "flex",
     flexDirection: "column",
-    width: "250px",
-    gap: "5px",
+    gap: "20px",
+  },
+  formRow: {
+    display: "flex",
+    alignItems: "center",
+    gap: "10px",
+  },
+  label: {
+    width: "100px",
     fontWeight: "bold",
+    fontSize: "18px",
+    textAlign: "right",
+  },
+  input: {
+    width: "300px",
+    height: "35px",
+    borderRadius: "6px",
+    border: "1px solid #999",
+    padding: "0 10px",
+    fontSize: "16px",
   },
   loginBtn: {
-    padding: "10px 20px", 
-    border: "none",
-    backgroundColor: "#e0e0e0",
-    borderRadius: "6px",
+    height: "90px", // 입력 두 줄과 높이 비슷하게
+    padding: "0 25px",
+    fontSize: "18px",
     fontWeight: "bold",
-    marginTop: "10px",
+    backgroundColor: "#e0e0e0",
+    border: "none",
+    borderRadius: "6px",
   },
   links: {
     display: "flex",
     justifyContent: "center",
-    gap: "30px",
+    gap: "50px",
     fontSize: "14px",
+    marginTop: "30px",
   },
 };
