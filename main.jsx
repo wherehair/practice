@@ -16,8 +16,9 @@ export default function Main() {
   return (
     <div style={styles.container}>
       <header style={styles.header}>
-        <div
-          style={{ ...styles.logo, cursor: "pointer" }}
+      <div style={styles.backIcon} onClick={() => navigate(-1)}>👈</div>
+      <div
+          style={{ ...styles.logo, cursor: "pointer"}}
           onClick={() => navigate("/")}
         >
           🌱 이게모헤어~?
@@ -69,11 +70,16 @@ const styles = {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: "50px",
+    marginBottom: "80px",
+  },
+  backIcon:{
+    fontSize: "35px",
   },
   logo: {
-    fontSize: "20px",
+    fontSize: "35px",
     fontWeight: "bold",
+    justifyContent: "flex-start",
+    gap: "20px",
   },
   menuIcon: {
     display: "flex",
@@ -92,8 +98,10 @@ const styles = {
     gap: "20px",
   },
   mainButton: {
+    width: "300px",
+    height: "70px",
     padding: "20px 50px",
-    fontSize: "18px",
+    fontSize: "23px",
     fontWeight: "bold",
     backgroundColor: "#e0e0e0",
     border: "none",
@@ -104,8 +112,10 @@ const styles = {
     gap: "20px",
   },
   button: {
+    width: "140px",
+    height: "70px",
     padding: "15px 25px",
-    fontSize: "16px",
+    fontSize: "23px",
     fontWeight: "bold",
     backgroundColor: "#e0e0e0",
     border: "none",
