@@ -66,7 +66,7 @@ const styles = {
     padding: "30px",
     fontFamily: "sans-serif",
     boxSizing: "border-box",
-    },
+  },
   header: {
     display: "flex",
     justifyContent: "space-between",
@@ -91,6 +91,7 @@ const styles = {
     width: "30px",
     height: "4px",
     backgroundColor: "#000",
+    borderRadius: "4px",
   },
   title: {
     textAlign: "center",
@@ -109,7 +110,7 @@ const styles = {
     marginBottom: "10px",
   },
   submitBtn: {
-    fontSize:"15px",
+    fontSize: "15px",
     padding: "5px 15px",
     fontWeight: "bold",
     border: "none",
