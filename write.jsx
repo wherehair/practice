@@ -7,7 +7,12 @@ export default function Write() {
   return (
     <div style={styles.container}>
       <header style={styles.header}>
-        <div style={styles.backIcon} onClick={() => navigate(-1)}>👈</div>
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/109/109618.png"
+          alt="back"
+          style={styles.backIcon}
+          onClick={() => navigate(-1)}
+        />
         <div
           style={{ ...styles.logo, cursor: "pointer" }}
           onClick={() => navigate("/")}
@@ -28,21 +33,21 @@ export default function Write() {
           <button style={styles.submitBtn}>완료</button>
         </div>
 
-        <label>태그</label>
+        <label style={styles.label}>태그</label>
         <input style={styles.input} type="text" />
 
-        <label>제목</label>
+        <label style={styles.label}>제목</label>
         <input style={styles.input} type="text" />
 
-        <label>내용</label>
+        <label style={styles.label}>내용</label>
         <textarea style={styles.textarea} />
 
-        <label>이미지</label>
+        <label style={styles.label}>이미지</label>
         <textarea style={styles.textarea} />
 
         <div style={styles.bottomRow}>
-          <button style={styles.bottomBtn}>📷</button>
           <div style={styles.rightBtns}>
+            <div></div>
             <button style={styles.bottomBtn}>목록</button>
             <button style={styles.bottomBtn}>수정</button>
             <button style={styles.bottomBtn}>삭제</button>
@@ -55,19 +60,23 @@ export default function Write() {
 
 const styles = {
   container: {
+    fontWeight: "bold",
     backgroundColor: "#ccc",
-    minHeight: "100vh",
+    height: "100vh",
     padding: "30px",
     fontFamily: "sans-serif",
-  },
+    boxSizing: "border-box",
+    },
   header: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: "20px",
+    marginBottom: "30px",
   },
-  backIcon:{
-    fontSize: "35px",
+  backIcon: {
+    width: "35px",
+    height: "35px",
+    cursor: "pointer",
   },
   logo: {
     fontSize: "35px",
@@ -100,11 +109,17 @@ const styles = {
     marginBottom: "10px",
   },
   submitBtn: {
+    fontSize:"15px",
     padding: "5px 15px",
     fontWeight: "bold",
     border: "none",
     backgroundColor: "#ccc",
     borderRadius: "6px",
+  },
+  label: {
+    fontWeight: "bold", // ✅ 추가된 부분
+    display: "block",
+    marginBottom: "5px",
   },
   input: {
     width: "100%",
@@ -127,12 +142,14 @@ const styles = {
     alignItems: "center",
   },
   bottomBtn: {
+    fontSize: "15px",
     padding: "8px 16px",
     fontWeight: "bold",
     border: "none",
-    backgroundColor: "#ddd",
+    backgroundColor: "#ccc",
     borderRadius: "6px",
     marginLeft: "5px",
+    justifyContent: "flex-end", // 👉 오른쪽 정렬!
   },
   rightBtns: {
     display: "flex",
