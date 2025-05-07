@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom"; // ✅ 페이지 이동을 위한 import
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -26,16 +26,16 @@ export default function Home() {
         <div style={styles.face}>🙂</div>
         <div style={styles.form}>
           <div style={styles.row}>
-            <label>ID</label>
-            <input type="text" />
+            <label style={styles.label}>ID</label>
+            <input type="text" style={styles.input} />
           </div>
           <div style={styles.row}>
-            <label>닉네임</label>
-            <input type="text" />
+            <label style={styles.label}>닉네임</label>
+            <input type="text" style={styles.input} />
           </div>
           <div style={styles.row}>
-            <label>생년월일</label>
-            <input type="text" />
+            <label style={styles.label}>생년월일</label>
+            <input type="text" style={styles.input} />
           </div>
         </div>
       </div>
@@ -61,7 +61,7 @@ const styles = {
     alignItems: "center",
     marginBottom: "20px",
   },
-  backIcon:{
+  backIcon: {
     fontSize: "35px",
   },
   logo: {
@@ -107,9 +107,18 @@ const styles = {
   },
   row: {
     display: "flex",
-    flexDirection: "column",
-    gap: "5px",
+    alignItems: "center",
+    gap: "10px",
     fontWeight: "bold",
+  },
+  label: {
+    width: "100px",
+  },
+  input: {
+    flex: 1,
+    padding: "5px",
+    borderRadius: "4px",
+    border: "1px solid #999",
   },
   button: {
     marginTop: "30px",
