@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const navigate = useNavigate();
+  const [hoverIndex, setHoverIndex] = useState(null);
+
+  const linkTexts = ["회원가입", "아이디 찾기", "비밀번호 찾기"];
 
   return (
     <div style={styles.container}>
@@ -43,9 +46,21 @@ export default function Login() {
       </div>
 
       <div style={styles.links}>
-        <a href="#">회원가입</a>
-        <a href="#">아이디 찾기</a>
-        <a href="#">비밀번호 찾기</a>
+        {linkTexts.map((text, i) => (
+          <a
+            key={i}
+            href="#"
+            style={{
+              color: hoverIndex === i ? "blue" : "black",
+              textDecoration: "none",
+              transition: "color 0.2s ease",
+            }}
+            onMouseEnter={() => setHoverIndex(i)}
+            onMouseLeave={() => setHoverIndex(null)}
+          >
+            {text}
+          </a>
+        ))}
       </div>
     </div>
   );
@@ -84,7 +99,7 @@ const styles = {
     width: "30px",
     height: "5px",
     backgroundColor: "#000",
-    borderRadius: "4px", // ✅ 여기!
+    borderRadius: "4px",
   },
   title: {
     fontSize: "35px",
