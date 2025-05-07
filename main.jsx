@@ -16,8 +16,8 @@ export default function Main() {
   return (
     <div style={styles.container}>
       <header style={styles.header}>
-      <div style={styles.backIcon} onClick={() => navigate(-1)}>👈</div>
-      <div
+        <div></div>
+        <div
           style={{ ...styles.logo, cursor: "pointer"}}
           onClick={() => navigate("/")}
         >
@@ -90,6 +90,7 @@ const styles = {
     width: "30px",
     height: "5px",
     backgroundColor: "#000",
+    borderRadius: "4px", // ✅ 여기!
   },
   main: {
     display: "flex",
