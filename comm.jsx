@@ -153,6 +153,7 @@ const styles = {
   writeBtn: {
     fontSize: "15px",
     padding: "5px 10px",
+    fontWeight: "Bold",
     borderRadius: "5px",
     border: "none",
     cursor: "pointer",
