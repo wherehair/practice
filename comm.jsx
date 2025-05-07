@@ -1,17 +1,11 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 
 export default function Comm() {
-  const navigate = useNavigate();
   return (
     <div style={styles.container}>
+      {/* 상단 헤더 */}
       <header style={styles.header}>
-        <div
-          style={{ ...styles.logo, cursor: "pointer" }}
-          onClick={() => navigate("/")}
-        >
-          🌱 이게모헤어~?
-        </div>
+        <div style={styles.logo}>🌱 이게모헤어~?</div>
         <div style={styles.menuIcon}>
           <div style={styles.bar}></div>
           <div style={styles.bar}></div>
@@ -19,80 +13,94 @@ export default function Comm() {
         </div>
       </header>
 
+      {/* 제목 */}
       <h2 style={styles.title}>커뮤니티</h2>
 
-      <div style={styles.searchRow}>
-        <button
-          style={styles.writeButton}
-          onClick={() => navigate("/write")} // ✅ 여기에 넣기
-        >
-          글쓰기
-        </button>
+      {/* 글쓰기 버튼 + 검색창 */}
+      <div style={styles.searchArea}>
+        <button style={styles.writeBtn}>글쓰기</button>
         <input type="text" placeholder="검색" style={styles.searchInput} />
+        <span style={styles.searchIcon}>🔍</span>
       </div>
 
-      <div style={styles.board}></div>
+      {/* 게시글 리스트 박스 */}
+      <div style={styles.listBox}>
+        {/* 여기에 게시글 리스트가 들어감 */}
+      </div>
 
-      <div style={styles.pageNav}>&lt;1/2/3/4/5/6/7/8/9&gt;</div>
+      {/* 페이지네이션 */}
+      <div style={styles.pagination}>
+        {"< 1 / 2 / 3 / 4 / 5 / 6 / 7 / 8 / 9 >"}
+      </div>
     </div>
   );
 }
 
 const styles = {
   container: {
-    backgroundColor: "#ccc",
+    backgroundColor: "#cfcfcf",
     height: "100vh",
-    padding: "30px",
+    padding: "20px",
     fontFamily: "sans-serif",
   },
   header: {
     display: "flex",
     justifyContent: "space-between",
+    alignItems: "center",
     marginBottom: "20px",
   },
   logo: {
+    fontSize: "20px",
     fontWeight: "bold",
   },
   menuIcon: {
     display: "flex",
     flexDirection: "column",
-    gap: "6px",
+    gap: "5px",
+    cursor: "pointer",
   },
   bar: {
     width: "30px",
     height: "5px",
-    backgroundColor: "#000",
+    backgroundColor: "black",
   },
   title: {
     textAlign: "center",
-    fontSize: "28px",
+    fontSize: "30px",
     fontWeight: "bold",
     marginBottom: "20px",
   },
-  searchRow: {
+  searchArea: {
     display: "flex",
+    alignItems: "center",
     gap: "10px",
-    marginBottom: "20px",
+    marginBottom: "10px",
+    justifyContent: "center",
   },
-  writeButton: {
-    padding: "8px 16px",
-    fontWeight: "bold",
+  writeBtn: {
+    padding: "5px 10px",
+    borderRadius: "5px",
     border: "none",
-    backgroundColor: "#e0e0e0",
-    borderRadius: "6px",
+    cursor: "pointer",
   },
   searchInput: {
-    flex: 1,
-    padding: "8px",
-    borderRadius: "6px",
-    border: "none",
+    width: "50%",
+    padding: "6px",
+    borderRadius: "5px",
+    border: "1px solid #ccc",
   },
-  board: {
-    backgroundColor: "#e0e0e0",
-    borderRadius: "10px",
+  searchIcon: {
+    cursor: "pointer",
+    fontSize: "18px",
+  },
+  listBox: {
+    width: "90%",
     height: "300px",
+    backgroundColor: "#e6e6e6",
+    margin: "0 auto",
+    borderRadius: "10px",
   },
-  pageNav: {
+  pagination: {
     textAlign: "center",
     marginTop: "20px",
     fontWeight: "bold",
