@@ -1,12 +1,15 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export default function Result() {
-  const navigate = useNavigate();
+    const navigate = useNavigate();
+    const location = useLocation();
+    const image = location.state?.image;
 
   return (
     <div style={styles.container}>
       <header style={styles.header}>
+        <div style={styles.backIcon} onClick={() => navigate(-1)}>👈</div>
         <div
           style={{ ...styles.logo, cursor: "pointer" }}
           onClick={() => navigate("/")}
@@ -23,8 +26,16 @@ export default function Result() {
       <h2 style={styles.title}>탈모 테스트 결과</h2>
 
       <div style={styles.imageRow}>
-        <div style={styles.imageBox}>
-          <p>내 탈모 사진</p>
+      <div style={styles.imageBox}>
+        {image ? (
+            <img
+            src={image}
+            alt="내 탈모 사진"
+            style={{ width: "100%", height: "100%", borderRadius: "10px", objectFit: "cover" }}
+            />
+        ) : (
+            <p>내 탈모 사진</p>
+        )}
         </div>
         <div style={styles.imageBox}>
           <p>비교 사진</p>
@@ -53,9 +64,14 @@ const styles = {
   header: {
     display: "flex",
     justifyContent: "space-between",
+    alignItems: "center",
     marginBottom: "20px",
   },
+  backIcon:{
+    fontSize: "35px",
+  },
   logo: {
+    fontSize: "35px",
     fontWeight: "bold",
   },
   menuIcon: {
