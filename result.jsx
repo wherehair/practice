@@ -1,15 +1,18 @@
 import React from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Result() {
-    const navigate = useNavigate();
-    const location = useLocation();
-    const image = location.state?.image;
+  const navigate = useNavigate();
 
   return (
     <div style={styles.container}>
       <header style={styles.header}>
-        <div style={styles.backIcon} onClick={() => navigate(-1)}>👈</div>
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/109/109618.png"
+          alt="back"
+          style={styles.backIcon}
+          onClick={() => navigate(-1)}
+        />
         <div
           style={{ ...styles.logo, cursor: "pointer" }}
           onClick={() => navigate("/")}
@@ -26,16 +29,8 @@ export default function Result() {
       <h2 style={styles.title}>탈모 테스트 결과</h2>
 
       <div style={styles.imageRow}>
-      <div style={styles.imageBox}>
-        {image ? (
-            <img
-            src={image}
-            alt="내 탈모 사진"
-            style={{ width: "100%", height: "100%", borderRadius: "10px", objectFit: "cover" }}
-            />
-        ) : (
-            <p>내 탈모 사진</p>
-        )}
+        <div style={styles.imageBox}>
+          <p>내 탈모 사진</p>
         </div>
         <div style={styles.imageBox}>
           <p>비교 사진</p>
@@ -43,7 +38,10 @@ export default function Result() {
       </div>
 
       <div style={styles.descriptionBox}>
-        <p>결과 설명</p>
+        <p>
+          탈모 유형은 M자형이며, 초기 단계로 판단됩니다. 지속적인 관리가
+          필요합니다.
+        </p>
       </div>
 
       <div style={styles.buttonRow}>
@@ -65,68 +63,75 @@ const styles = {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: "20px",
+    marginBottom: "30px",
   },
-  backIcon:{
-    fontSize: "35px",
+  backIcon: {
+    width: "35px",
+    height: "35px",
+    cursor: "pointer",
   },
   logo: {
-    fontSize: "35px",
     fontWeight: "bold",
+    fontSize: "30px",
   },
   menuIcon: {
     display: "flex",
     flexDirection: "column",
     gap: "5px",
+    cursor: "pointer",
   },
   bar: {
     width: "30px",
     height: "4px",
     backgroundColor: "#000",
+    borderRadius: "4px",
   },
   title: {
     textAlign: "center",
-    fontSize: "28px",
+    fontSize: "32px",
     fontWeight: "bold",
-    marginBottom: "20px",
+    marginBottom: "30px",
   },
   imageRow: {
     display: "flex",
     justifyContent: "center",
     gap: "40px",
-    marginBottom: "20px",
+    marginBottom: "30px",
   },
   imageBox: {
     backgroundColor: "#e0e0e0",
-    width: "200px",
-    height: "200px",
-    borderRadius: "10px",
+    width: "220px",
+    height: "220px",
+    borderRadius: "12px",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     fontWeight: "bold",
+    fontSize: "16px",
   },
   descriptionBox: {
-    fontSize: "20px",
-    fontWeight: "Bold",
     backgroundColor: "#e0e0e0",
-    borderRadius: "10px",
-    height: "100px",
-    padding: "10px",
-    marginBottom: "20px",
+    borderRadius: "12px",
+    height: "120px",
+    padding: "15px",
+    marginBottom: "30px",
+    fontSize: "16px",
+    fontWeight: "bold",
+    display: "flex",
+    alignItems: "center",
   },
   buttonRow: {
     display: "flex",
     justifyContent: "center",
-    gap: "20px",
+    gap: "30px",
   },
   button: {
-    fontSize: "15px",
-    fontWeight: "bold",
-    padding: "10px 20px",
-    borderRadius: "6px",
+    padding: "8px 20px",
+    borderRadius: "8px",
     border: "none",
     backgroundColor: "#f0f0f0",
     fontWeight: "bold",
+    fontSize: "18px",
+    cursor: "pointer",
   },
 };
