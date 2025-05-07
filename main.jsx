@@ -1,8 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import mainLogo from "./mainlogo_img.png"; // ✅ PNG 이미지 import
 
 export default function Main() {
   const navigate = useNavigate();
+
   const handleClick = (page) => {
     if (page === "로그인") navigate("/login");
     else if (page === "프로필") navigate("/home");
@@ -16,13 +18,15 @@ export default function Main() {
   return (
     <div style={styles.container}>
       <header style={styles.header}>
-        <div></div>
+        <img src={mainLogo} alt="logo" style={styles.icon} />
+
         <div
-          style={{ ...styles.logo, cursor: "pointer"}}
+          style={{ ...styles.logo, cursor: "pointer" }}
           onClick={() => navigate("/")}
         >
           🌱 이게모헤어~?
         </div>
+
         <div style={styles.menuIcon}>
           <div style={styles.bar}></div>
           <div style={styles.bar}></div>
@@ -72,14 +76,16 @@ const styles = {
     alignItems: "center",
     marginBottom: "80px",
   },
-  backIcon:{
-    fontSize: "35px",
+  icon: {
+    width: "50px",
+    height: "50px",
+    borderRadius: "50%",
+    objectFit: "cover",
   },
   logo: {
     fontSize: "35px",
     fontWeight: "bold",
-    justifyContent: "flex-start",
-    gap: "20px",
+    textAlign: "center",
   },
   menuIcon: {
     display: "flex",
@@ -90,7 +96,7 @@ const styles = {
     width: "30px",
     height: "5px",
     backgroundColor: "#000",
-    borderRadius: "4px", // ✅ 여기!
+    borderRadius: "4px",
   },
   main: {
     display: "flex",
