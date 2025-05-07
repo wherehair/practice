@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Comm() {
   const dummyPosts = [
@@ -10,12 +11,16 @@ export default function Comm() {
   ];
 
   const [posts] = useState(dummyPosts);
-
+  const navigate = useNavigate();
   return (
     <div style={styles.container}>
-      {/* 헤더 */}
       <header style={styles.header}>
-        <div style={styles.logo}>🌱 이게모헤어~?</div>
+        <div
+          style={{ ...styles.logo, cursor: "pointer" }}
+          onClick={() => navigate("/")}
+        >
+          🌱 이게모헤어~?
+        </div>
         <div style={styles.menuIcon}>
           <div style={styles.bar}></div>
           <div style={styles.bar}></div>
@@ -28,7 +33,9 @@ export default function Comm() {
 
       {/* 글쓰기 + 검색창 */}
       <div style={styles.searchArea}>
-        <button style={styles.writeBtn}>글쓰기</button>
+        <button style={styles.writeBtn} onClick={() => navigate("/write")}>
+          글쓰기
+        </button>
         <input type="text" placeholder="검색" style={styles.searchInput} />
         <span style={styles.searchIcon}>🔍</span>
       </div>
