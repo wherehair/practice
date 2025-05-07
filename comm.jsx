@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 
 export default function Comm() {
+  const dummyPosts = [
+    { id: 1, title: "탈모 관리 꿀팁 공유해요!" },
+    { id: 2, title: "오늘 머리 감았는데 너무 빠져요ㅠㅠ" },
+    { id: 3, title: "좋은 샴푸 추천 좀요!" },
+    { id: 4, title: "병원 진료 후기 써봅니다." },
+    { id: 5, title: "이게모헤어 첫 글 남겨요~" },
+  ];
+
+  const [posts] = useState(dummyPosts);
+
   return (
     <div style={styles.container}>
-      {/* 상단 헤더 */}
+      {/* 헤더 */}
       <header style={styles.header}>
         <div style={styles.logo}>🌱 이게모헤어~?</div>
         <div style={styles.menuIcon}>
@@ -16,16 +26,20 @@ export default function Comm() {
       {/* 제목 */}
       <h2 style={styles.title}>커뮤니티</h2>
 
-      {/* 글쓰기 버튼 + 검색창 */}
+      {/* 글쓰기 + 검색창 */}
       <div style={styles.searchArea}>
         <button style={styles.writeBtn}>글쓰기</button>
         <input type="text" placeholder="검색" style={styles.searchInput} />
         <span style={styles.searchIcon}>🔍</span>
       </div>
 
-      {/* 게시글 리스트 박스 */}
+      {/* 게시글 리스트 */}
       <div style={styles.listBox}>
-        {/* 여기에 게시글 리스트가 들어감 */}
+        {posts.map((post) => (
+          <div key={post.id} style={styles.postItem}>
+            {post.title}
+          </div>
+        ))}
       </div>
 
       {/* 페이지네이션 */}
@@ -99,6 +113,13 @@ const styles = {
     backgroundColor: "#e6e6e6",
     margin: "0 auto",
     borderRadius: "10px",
+    padding: "10px",
+    overflowY: "auto",
+  },
+  postItem: {
+    padding: "10px",
+    borderBottom: "1px solid #aaa",
+    cursor: "pointer",
   },
   pagination: {
     textAlign: "center",
