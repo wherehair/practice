@@ -8,35 +8,13 @@ export default function Comm() {
     { id: 3, title: "좋은 샴푸 추천 좀요!" },
     { id: 4, title: "병원 진료 후기 써봅니다." },
     { id: 5, title: "이게모헤어 첫 글 남겨요~" },
-    { id: 6, title: "두피 마사지 효과 본 사람?" },
-    { id: 7, title: "영양제 먹으면 진짜 나아요?" },
-    { id: 8, title: "모자 자주 쓰면 안 좋나요?" },
-    { id: 9, title: "스트레스 탈모 극복법 공유" },
   ];
 
   const [posts] = useState(dummyPosts);
-  const [currentPage, setCurrentPage] = useState(1);
-  const postsPerPage = 5;
   const navigate = useNavigate();
-
-  const indexOfLast = currentPage * postsPerPage;
-  const indexOfFirst = indexOfLast - postsPerPage;
-  const currentPosts = posts.slice(indexOfFirst, indexOfLast);
-  const totalPages = Math.ceil(posts.length / postsPerPage);
-
-  const handlePageClick = (pageNum) => {
-    setCurrentPage(pageNum);
-  };
-
   return (
     <div style={styles.container}>
       <header style={styles.header}>
-        <img
-          src="https://cdn-icons-png.flaticon.com/512/109/109618.png"
-          alt="back"
-          style={styles.backIcon}
-          onClick={() => navigate(-1)}
-        />
         <div
           style={{ ...styles.logo, cursor: "pointer" }}
           onClick={() => navigate("/")}
@@ -64,41 +42,16 @@ export default function Comm() {
 
       {/* 게시글 리스트 */}
       <div style={styles.listBox}>
-        {currentPosts.map((post) => (
-            <div key={post.id} style={styles.postItem}>
+        {posts.map((post) => (
+          <div key={post.id} style={styles.postItem}>
             {post.title}
-            </div>
+          </div>
         ))}
       </div>
 
-
       {/* 페이지네이션 */}
       <div style={styles.pagination}>
-        <span
-          style={styles.pageArrow}
-          onClick={() => handlePageClick(Math.max(currentPage - 1, 1))}
-        >
-          &lt;
-        </span>
-        {[...Array(totalPages)].map((_, i) => (
-          <span
-            key={i}
-            onClick={() => handlePageClick(i + 1)}
-            style={{
-              margin: "0 5px",
-              cursor: "pointer",
-              fontWeight: currentPage === i + 1 ? "bold" : "normal",
-            }}
-          >
-            {i + 1}
-          </span>
-        ))}
-        <span
-          style={styles.pageArrow}
-          onClick={() => handlePageClick(Math.min(currentPage + 1, totalPages))}
-        >
-          &gt;
-        </span>
+        {"< 1 / 2 / 3 / 4 / 5 / 6 / 7 / 8 / 9 >"}
       </div>
     </div>
   );
@@ -117,13 +70,8 @@ const styles = {
     alignItems: "center",
     marginBottom: "20px",
   },
-  backIcon: {
-    width: "35px",
-    height: "35px",
-    cursor: "pointer",
-  },
   logo: {
-    fontSize: "35px",
+    fontSize: "20px",
     fontWeight: "bold",
   },
   menuIcon: {
@@ -151,12 +99,10 @@ const styles = {
     justifyContent: "center",
   },
   writeBtn: {
-    fontSize: "15px",
     padding: "5px 10px",
     borderRadius: "5px",
     border: "none",
     cursor: "pointer",
-    backgroundColor: "#fff",
   },
   searchInput: {
     width: "50%",
@@ -183,7 +129,6 @@ const styles = {
     cursor: "pointer",
   },
   pagination: {
-    textSize: "30px",
     textAlign: "center",
     marginTop: "20px",
     fontWeight: "bold",
