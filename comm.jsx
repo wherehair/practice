@@ -22,7 +22,7 @@ export default function Comm() {
   const indexOfLast = currentPage * postsPerPage;
   const indexOfFirst = indexOfLast - postsPerPage;
   const currentPosts = posts.slice(indexOfFirst, indexOfLast);
-  const totalPages = Math.ceil(posts.length / postsPerPage); //위로 8줄 페이지 번호 부여를 위해 추가
+  const totalPages = Math.ceil(posts.length / postsPerPage);
 
   const handlePageClick = (pageNum) => {
     setCurrentPage(pageNum);
@@ -31,8 +31,13 @@ export default function Comm() {
   return (
     <div style={styles.container}>
       <header style={styles.header}>
-      <div style={styles.backIcon} onClick={() => navigate(-1)}>👈</div>
-      <div
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/109/109618.png"
+          alt="back"
+          style={styles.backIcon}
+          onClick={() => navigate(-1)}
+        />
+        <div
           style={{ ...styles.logo, cursor: "pointer" }}
           onClick={() => navigate("/")}
         >
@@ -112,8 +117,10 @@ const styles = {
     alignItems: "center",
     marginBottom: "20px",
   },
-  backIcon:{
-    fontSize: "35px",
+  backIcon: {
+    width: "35px",
+    height: "35px",
+    cursor: "pointer",
   },
   logo: {
     fontSize: "35px",
@@ -144,10 +151,12 @@ const styles = {
     justifyContent: "center",
   },
   writeBtn: {
+    fontSize: "15px",
     padding: "5px 10px",
     borderRadius: "5px",
     border: "none",
     cursor: "pointer",
+    backgroundColor: "#fff",
   },
   searchInput: {
     width: "50%",
@@ -174,6 +183,7 @@ const styles = {
     cursor: "pointer",
   },
   pagination: {
+    textSize: "30px",
     textAlign: "center",
     marginTop: "20px",
     fontWeight: "bold",
