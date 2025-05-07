@@ -6,6 +6,7 @@ export default function Daily() {
   return (
     <div style={styles.container}>
       <header style={styles.header}>
+      <div style={styles.backIcon} onClick={() => navigate(-1)}>👈</div>
         <div
           style={{ ...styles.logo, cursor: "pointer" }}
           onClick={() => navigate("/")}
@@ -48,9 +49,14 @@ const styles = {
   header: {
     display: "flex",
     justifyContent: "space-between",
+    alignItems: "center",
     marginBottom: "20px",
   },
+  backIcon:{
+    fontSize: "35px",
+  },
   logo: {
+    fontSize: "35px",
     fontWeight: "bold",
   },
   menuIcon: {
