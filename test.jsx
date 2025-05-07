@@ -25,7 +25,12 @@ export default function Test() {
   return (
     <div style={styles.container}>
       <header style={styles.header}>
-        <div style={styles.backIcon} onClick={() => navigate(-1)}>👈</div>
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/109/109618.png"
+          alt="back"
+          style={styles.backIcon}
+          onClick={() => navigate(-1)}
+        />
         <div
           style={{ ...styles.logo, cursor: "pointer" }}
           onClick={() => navigate("/")}
@@ -42,7 +47,7 @@ export default function Test() {
       <h2 style={styles.title}>탈모 테스트</h2>
 
       <div style={styles.imageBox}>
-        <p>내 탈모 사진</p>
+        <p style={styles.img}>내 탈모 사진</p>
         <input type="file" accept="image/*" onChange={handleImageUpload} />
         
         {image && (
@@ -73,14 +78,22 @@ const styles = {
     padding: "30px",
     fontFamily: "sans-serif",
   },
+  img: {
+    fontSize: "20px",
+    fontWeight: "bold",
+    marginTop: "5px",
+    marginBottom: "10px",
+  },
   header: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: "20px",
   },
-  backIcon:{
-    fontSize: "35px",
+  backIcon: {
+    width: "35px",
+    height: "35px",
+    cursor: "pointer",
   },
   logo: {
     fontSize: "35px",
@@ -114,7 +127,9 @@ const styles = {
     justifyContent: "center",
     gap: "10px",
   },
-  button: {
+  button: {    
+    fontSize: "15px",
+    fontWeight: "bold",
     padding: "10px 20px",
     borderRadius: "6px",
     border: "none",
