@@ -6,7 +6,12 @@ export default function Home() {
   return (
     <div style={styles.container}>
       <header style={styles.header}>
-        <div style={styles.backIcon} onClick={() => navigate(-1)}>👈</div>
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/109/109618.png"
+          alt="back"
+          style={styles.backIcon}
+          onClick={() => navigate(-1)}
+        />
         <div
           style={{ ...styles.logo, cursor: "pointer" }}
           onClick={() => navigate("/")}
@@ -62,7 +67,9 @@ const styles = {
     marginBottom: "20px",
   },
   backIcon: {
-    fontSize: "35px",
+    width: "35px",
+    height: "35px",
+    cursor: "pointer",
   },
   logo: {
     fontSize: "35px",
@@ -77,6 +84,7 @@ const styles = {
     width: "30px",
     height: "5px",
     backgroundColor: "#000",
+    borderRadius: "4px",
   },
   title: {
     fontSize: "30px",
@@ -122,8 +130,9 @@ const styles = {
   },
   button: {
     marginTop: "30px",
-    padding: "10px 20px",
+    padding: "8px 12px",
     fontWeight: "bold",
+    fontSize: "15px", // ✅ 이 줄 추가!
     backgroundColor: "#e0e0e0",
     border: "none",
     borderRadius: "6px",
