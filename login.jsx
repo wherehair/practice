@@ -7,6 +7,7 @@ export default function Login() {
   return (
     <div style={styles.container}>
       <header style={styles.header}>
+        <div style={styles.backIcon} onClick={() => navigate(-1)}>👈</div>
         <div
           style={{ ...styles.logo, cursor: "pointer" }}
           onClick={() => navigate("/")}
@@ -54,11 +55,15 @@ const styles = {
   header: {
     display: "flex",
     justifyContent: "space-between",
-    marginBottom: "30px",
+    alignItems: "center",
+    marginBottom: "20px",
+  },
+  backIcon:{
+    fontSize: "35px",
   },
   logo: {
     fontWeight: "bold",
-    fontSize: "20px",
+    fontSize: "35px",
   },
   menuIcon: {
     display: "flex",
