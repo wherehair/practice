@@ -65,12 +65,11 @@ export default function Comm() {
       {/* 게시글 리스트 */}
       <div style={styles.listBox}>
         {currentPosts.map((post) => (
-            <div key={post.id} style={styles.postItem}>
+          <div key={post.id} style={styles.postItem}>
             {post.title}
-            </div>
+          </div>
         ))}
       </div>
-
 
       {/* 페이지네이션 */}
       <div style={styles.pagination}>
@@ -136,6 +135,7 @@ const styles = {
     width: "30px",
     height: "5px",
     backgroundColor: "black",
+    borderRadius: "4px",
   },
   title: {
     textAlign: "center",
