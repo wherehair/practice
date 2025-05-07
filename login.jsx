@@ -7,7 +7,12 @@ export default function Login() {
   return (
     <div style={styles.container}>
       <header style={styles.header}>
-        <div style={styles.backIcon} onClick={() => navigate(-1)}>👈</div>
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/109/109618.png"
+          alt="back"
+          style={styles.backIcon}
+          onClick={() => navigate(-1)}
+        />
         <div
           style={{ ...styles.logo, cursor: "pointer" }}
           onClick={() => navigate("/")}
@@ -48,6 +53,7 @@ export default function Login() {
 
 const styles = {
   container: {
+    fontWeight: "bold",
     backgroundColor: "#ccc",
     height: "100vh",
     padding: "30px",
@@ -61,7 +67,9 @@ const styles = {
     marginBottom: "30px",
   },
   backIcon: {
-    fontSize: "35px",
+    width: "35px",
+    height: "35px",
+    cursor: "pointer",
   },
   logo: {
     fontWeight: "bold",
@@ -76,6 +84,7 @@ const styles = {
     width: "30px",
     height: "5px",
     backgroundColor: "#000",
+    borderRadius: "4px", // ✅ 여기!
   },
   title: {
     fontSize: "35px",
@@ -107,7 +116,7 @@ const styles = {
     textAlign: "right",
   },
   input: {
-    width: "300px",
+    width: "280px",
     height: "35px",
     borderRadius: "6px",
     border: "1px solid #999",
@@ -115,7 +124,7 @@ const styles = {
     fontSize: "16px",
   },
   loginBtn: {
-    height: "90px", // 입력 두 줄과 높이 비슷하게
+    height: "90px",
     padding: "0 25px",
     fontSize: "18px",
     fontWeight: "bold",
