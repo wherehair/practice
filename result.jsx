@@ -107,6 +107,8 @@ const styles = {
     fontWeight: "bold",
   },
   descriptionBox: {
+    fontSize: "20px",
+    fontWeight: "Bold",
     backgroundColor: "#e0e0e0",
     borderRadius: "10px",
     height: "100px",
@@ -119,6 +121,8 @@ const styles = {
     gap: "20px",
   },
   button: {
+    fontSize: "15px",
+    fontWeight: "bold",
     padding: "10px 20px",
     borderRadius: "6px",
     border: "none",
