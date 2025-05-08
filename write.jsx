@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Write() {
   const navigate = useNavigate();
+  const [image, setImage] = useState(null);
+
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const imageURL = URL.createObjectURL(file);
+      setImage(imageURL);
+    }
+  };
 
   return (
     <div style={styles.container}>
@@ -30,7 +39,9 @@ export default function Write() {
 
       <form style={styles.form}>
         <div style={styles.topRight}>
-          <button style={styles.submitBtn}>완료</button>
+          <button type="button" style={styles.submitBtn}>
+            완료
+          </button>
         </div>
 
         <label style={styles.label}>태그</label>
@@ -40,17 +51,35 @@ export default function Write() {
         <input style={styles.input} type="text" />
 
         <label style={styles.label}>내용</label>
-        <textarea style={styles.textarea} />
+        <textarea style={styles.textarea} placeholder="내용을 입력하세요" />
 
         <label style={styles.label}>이미지</label>
-        <textarea style={styles.textarea} />
+        <input
+          style={styles.imagebox}
+          type="file"
+          accept="image/*"
+          onChange={handleImageUpload}
+        />
+
+        {image && (
+          <img
+            src={image}
+            alt="업로드된 사진"
+            style={{ marginTop: "10px", width: "100%", borderRadius: "10px" }}
+          />
+        )}
 
         <div style={styles.bottomRow}>
           <div style={styles.rightBtns}>
-            <div></div>
-            <button style={styles.bottomBtn}>목록</button>
-            <button style={styles.bottomBtn}>수정</button>
-            <button style={styles.bottomBtn}>삭제</button>
+            <button type="button" style={styles.bottomBtn}>
+              목록
+            </button>
+            <button type="button" style={styles.bottomBtn}>
+              수정
+            </button>
+            <button type="button" style={styles.bottomBtn}>
+              삭제
+            </button>
           </div>
         </div>
       </form>
@@ -71,7 +100,8 @@ const styles = {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: "30px",
+    marginBottom: "20px",
+    position: "relative", 
   },
   backIcon: {
     width: "35px",
@@ -79,6 +109,9 @@ const styles = {
     cursor: "pointer",
   },
   logo: {
+    position: "absolute", // ✅ 수정
+    left: "50%",           // ✅ 수정
+    transform: "translateX(-50%)", // ✅ 수정
     fontSize: "35px",
     fontWeight: "bold",
   },
@@ -108,6 +141,7 @@ const styles = {
     display: "flex",
     justifyContent: "flex-end",
     marginBottom: "10px",
+    padding: "15px",
   },
   submitBtn: {
     fontSize: "15px",
@@ -116,21 +150,30 @@ const styles = {
     border: "none",
     backgroundColor: "#ccc",
     borderRadius: "6px",
+    cursor: "pointer",
   },
   label: {
-    fontWeight: "bold", // ✅ 추가된 부분
+    fontWeight: "bold",
     display: "block",
     marginBottom: "5px",
   },
   input: {
-    width: "100%",
+    width: "98%",
     padding: "10px",
     marginBottom: "15px",
     border: "none",
     borderRadius: "6px",
   },
+  imagebox: {
+    backgroundColor: "#fff",
+    borderRadius: "6px",
+    width: "98%",
+    height: "auto",
+    padding: "10px",
+    marginBottom: "20px",
+  },
   textarea: {
-    width: "100%",
+    width: "98%",
     height: "100px",
     marginBottom: "15px",
     padding: "10px",
@@ -141,6 +184,7 @@ const styles = {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
+    marginTop: "20px",
   },
   bottomBtn: {
     fontSize: "15px",
@@ -150,7 +194,8 @@ const styles = {
     backgroundColor: "#ccc",
     borderRadius: "6px",
     marginLeft: "5px",
-    justifyContent: "flex-end", // 👉 오른쪽 정렬!
+    justifyContent: "flex-end",
+    cursor: "pointer",
   },
   rightBtns: {
     display: "flex",
