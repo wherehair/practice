@@ -54,19 +54,17 @@ export default function Home() {
 
 const styles = {
   container: {
-    fontWeight: "bold",
     backgroundColor: "#ccc",
     height: "100vh",
     padding: "30px",
-    fontFamily: "sans-serif",
     boxSizing: "border-box",
+    fontFamily: "sans-serif",
   },
   header: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: "20px",
-    position: "relative", 
   },
   backIcon: {
     width: "35px",
@@ -141,6 +139,5 @@ const styles = {
     display: "block",
     marginLeft: "auto",
     marginRight: "auto",
-    cursor: "pointer",
   },
 };
