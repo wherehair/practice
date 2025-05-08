@@ -79,7 +79,8 @@ const styles = {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: "30px",
+    marginBottom: "20px",
+    position: "relative", 
   },
   backIcon: {
     width: "35px",
@@ -146,6 +147,7 @@ const styles = {
     backgroundColor: "#e0e0e0",
     border: "none",
     borderRadius: "6px",
+    cursor: "pointer",
   },
   links: {
     display: "flex",
