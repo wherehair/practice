@@ -50,10 +50,8 @@ export default function Comm() {
         </div>
       </header>
 
-      {/* 제목 */}
       <h2 style={styles.title}>커뮤니티</h2>
 
-      {/* 글쓰기 + 검색창 */}
       <div style={styles.searchArea}>
         <button style={styles.writeBtn} onClick={() => navigate("/write")}>
           글쓰기
@@ -62,7 +60,6 @@ export default function Comm() {
         <span style={styles.searchIcon}>🔍</span>
       </div>
 
-      {/* 게시글 리스트 */}
       <div style={styles.listBox}>
         {currentPosts.map((post) => (
           <div key={post.id} style={styles.postItem}>
@@ -71,7 +68,6 @@ export default function Comm() {
         ))}
       </div>
 
-      {/* 페이지네이션 */}
       <div style={styles.pagination}>
         <span
           style={styles.pageArrow}
@@ -105,16 +101,19 @@ export default function Comm() {
 
 const styles = {
   container: {
+    fontWeight: "bold",
     backgroundColor: "#cfcfcf",
     height: "100vh",
-    padding: "20px",
+    padding: "30px",
     fontFamily: "sans-serif",
+    boxSizing: "border-box",
   },
   header: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: "20px",
+    position: "relative", 
   },
   backIcon: {
     width: "35px",
@@ -122,6 +121,9 @@ const styles = {
     cursor: "pointer",
   },
   logo: {
+    position: "absolute", 
+    left: "50%",           
+    transform: "translateX(-50%)", 
     fontSize: "35px",
     fontWeight: "bold",
   },
