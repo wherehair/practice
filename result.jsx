@@ -54,16 +54,19 @@ export default function Result() {
 
 const styles = {
   container: {
+    fontWeight: "bold",
     backgroundColor: "#ccc",
-    minHeight: "100vh",
+    height: "100vh",
     padding: "30px",
     fontFamily: "sans-serif",
+    boxSizing: "border-box",
   },
   header: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: "30px",
+    marginBottom: "20px",
+    position: "relative", 
   },
   backIcon: {
     width: "35px",
