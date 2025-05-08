@@ -113,6 +113,8 @@ const styles = {
     backgroundColor: "#e0e0e0",
     border: "none",
     borderRadius: "10px",
+    cursor: "pointer",
+
   },
   buttonRow: {
     display: "flex",
@@ -127,5 +129,6 @@ const styles = {
     backgroundColor: "#e0e0e0",
     border: "none",
     borderRadius: "10px",
+    cursor: "pointer",
   },
 };
