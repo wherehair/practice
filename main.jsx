@@ -114,7 +114,6 @@ const styles = {
     border: "none",
     borderRadius: "10px",
     cursor: "pointer",
-
   },
   buttonRow: {
     display: "flex",
