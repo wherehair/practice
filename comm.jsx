@@ -30,6 +30,7 @@ export default function Comm() {
 
   return (
     <div style={styles.container}>
+      {/* ✅ 기존 헤더 유지 */}
       <header style={styles.header}>
         <img
           src="https://cdn-icons-png.flaticon.com/512/109/109618.png"
@@ -69,10 +70,7 @@ export default function Comm() {
       </div>
 
       <div style={styles.pagination}>
-        <span
-          style={styles.pageArrow}
-          onClick={() => handlePageClick(Math.max(currentPage - 1, 1))}
-        >
+        <span style={styles.pageArrow} onClick={() => handlePageClick(1)}>
           &lt;
         </span>
         {[...Array(totalPages)].map((_, i) => (
@@ -90,7 +88,7 @@ export default function Comm() {
         ))}
         <span
           style={styles.pageArrow}
-          onClick={() => handlePageClick(Math.min(currentPage + 1, totalPages))}
+          onClick={() => handlePageClick(totalPages)}
         >
           &gt;
         </span>
@@ -113,7 +111,7 @@ const styles = {
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: "20px",
-    position: "relative", 
+    position: "relative",
   },
   backIcon: {
     width: "35px",
@@ -121,9 +119,9 @@ const styles = {
     cursor: "pointer",
   },
   logo: {
-    position: "absolute", 
-    left: "50%",           
-    transform: "translateX(-50%)", 
+    position: "absolute",
+    left: "50%",
+    transform: "translateX(-50%)",
     fontSize: "35px",
     fontWeight: "bold",
   },
@@ -162,7 +160,7 @@ const styles = {
     backgroundColor: "#fff",
   },
   searchInput: {
-    width: "50%",
+    width: "40%",
     padding: "6px",
     borderRadius: "5px",
     border: "1px solid #ccc",
@@ -173,6 +171,7 @@ const styles = {
   },
   listBox: {
     width: "90%",
+    maxWidth: "600px",
     height: "300px",
     backgroundColor: "#e6e6e6",
     margin: "0 auto",
@@ -186,9 +185,13 @@ const styles = {
     cursor: "pointer",
   },
   pagination: {
-    textSize: "30px",
+    fontSize: "20px",
     textAlign: "center",
     marginTop: "20px",
     fontWeight: "bold",
+  },
+  pageArrow: {
+    cursor: "pointer",
+    margin: "0 10px",
   },
 };
