@@ -1,36 +1,35 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { usePostContext } from "./postContext";
 
 export default function Comm() {
-  const dummyPosts = [
-    { id: 1, title: "탈모 관리 꿀팁 공유해요!" },
-    { id: 2, title: "오늘 머리 감았는데 너무 빠져요ㅠㅠ" },
-    { id: 3, title: "좋은 샴푸 추천 좀요!" },
-    { id: 4, title: "병원 진료 후기 써봅니다." },
-    { id: 5, title: "이게모헤어 첫 글 남겨요~" },
-    { id: 6, title: "두피 마사지 효과 본 사람?" },
-    { id: 7, title: "영양제 먹으면 진짜 나아요?" },
-    { id: 8, title: "모자 자주 쓰면 안 좋나요?" },
-    { id: 9, title: "스트레스 탈모 극복법 공유" },
-  ];
-
-  const [posts] = useState(dummyPosts);
-  const [currentPage, setCurrentPage] = useState(1);
-  const postsPerPage = 5;
   const navigate = useNavigate();
+  const { posts } = usePostContext();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const postsPerPage = 5;
+
+  // ✅ 필터링된 게시글
+  const filteredPosts = posts.filter((post) =>
+    post.tag.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   const indexOfLast = currentPage * postsPerPage;
   const indexOfFirst = indexOfLast - postsPerPage;
-  const currentPosts = posts.slice(indexOfFirst, indexOfLast);
-  const totalPages = Math.ceil(posts.length / postsPerPage);
+  const currentPosts = [...filteredPosts].slice(indexOfFirst, indexOfLast);
+  const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
 
-  const handlePageClick = (pageNum) => {
-    setCurrentPage(pageNum);
+  const handlePageClick = (pageNum) => setCurrentPage(pageNum);
+
+  const handleSearch = (e) => {
+    if (e.key === "Enter") {
+      setCurrentPage(1); // 검색 시 1페이지로 초기화
+    }
   };
 
   return (
     <div style={styles.container}>
-      {/* ✅ 기존 헤더 유지 */}
       <header style={styles.header}>
         <img
           src="https://cdn-icons-png.flaticon.com/512/109/109618.png"
@@ -42,7 +41,7 @@ export default function Comm() {
           style={{ ...styles.logo, cursor: "pointer" }}
           onClick={() => navigate("/")}
         >
-          🌱 이게모헤어~?
+          🌱 이것모헤어~?
         </div>
         <div style={styles.menuIcon}>
           <div style={styles.bar}></div>
@@ -57,14 +56,24 @@ export default function Comm() {
         <button style={styles.writeBtn} onClick={() => navigate("/write")}>
           글쓰기
         </button>
-        <input type="text" placeholder="검색" style={styles.searchInput} />
-        <span style={styles.searchIcon}>🔍</span>
+        <input
+          type="text"
+          placeholder="태그로 검색 (예: 탈모)"
+          style={styles.searchInput}
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          onKeyDown={handleSearch}
+        />
       </div>
 
       <div style={styles.listBox}>
         {currentPosts.map((post) => (
-          <div key={post.id} style={styles.postItem}>
-            {post.title}
+          <div
+            key={post.id}
+            style={styles.postItem}
+            onClick={() => navigate(`/write/${post.id}`)}
+          >
+            <strong>{post.tag}</strong> {post.title}
           </div>
         ))}
       </div>
@@ -101,7 +110,7 @@ const styles = {
   container: {
     fontWeight: "bold",
     backgroundColor: "#cfcfcf",
-    height: "100vh",
+    minHeight: "100vh",
     padding: "30px",
     fontFamily: "sans-serif",
     boxSizing: "border-box",
@@ -164,10 +173,6 @@ const styles = {
     padding: "6px",
     borderRadius: "5px",
     border: "1px solid #ccc",
-  },
-  searchIcon: {
-    cursor: "pointer",
-    fontSize: "18px",
   },
   listBox: {
     width: "90%",
