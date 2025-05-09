@@ -77,7 +77,7 @@ export default function Comm() {
           </div>
         ))}
       </div>
-
+      
       <div style={styles.pagination}>
         <span style={styles.pageArrow} onClick={() => handlePageClick(1)}>
           &lt;
