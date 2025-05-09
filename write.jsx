@@ -71,7 +71,11 @@ export default function Write() {
 
         <div style={styles.bottomRow}>
           <div style={styles.rightBtns}>
-            <button type="button" style={styles.bottomBtn}>
+            <button
+              type="button"
+              style={styles.bottomBtn}
+              onClick={() => navigate("/comm")}
+            >
               목록
             </button>
             <button type="button" style={styles.bottomBtn}>
@@ -101,7 +105,7 @@ const styles = {
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: "20px",
-    position: "relative", 
+    position: "relative",
   },
   backIcon: {
     width: "35px",
@@ -109,9 +113,9 @@ const styles = {
     cursor: "pointer",
   },
   logo: {
-    position: "absolute", // ✅ 수정
-    left: "50%",           // ✅ 수정
-    transform: "translateX(-50%)", // ✅ 수정
+    position: "absolute",
+    left: "50%",
+    transform: "translateX(-50%)",
     fontSize: "35px",
     fontWeight: "bold",
   },
