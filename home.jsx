@@ -66,7 +66,7 @@ const styles = {
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: "20px",
-    position: "relative", 
+    position: "relative",
   },
   backIcon: {
     width: "35px",
@@ -134,7 +134,7 @@ const styles = {
     marginTop: "30px",
     padding: "8px 12px",
     fontWeight: "bold",
-    fontSize: "15px", // ✅ 이 줄 추가!
+    fontSize: "15px",
     backgroundColor: "#e0e0e0",
     border: "none",
     borderRadius: "6px",
