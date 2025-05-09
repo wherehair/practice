@@ -237,7 +237,6 @@ const styles = {
     borderRadius: "6px",
   },
   imagebox: {
-    backgroundColor: "#fff",
     borderRadius: "6px",
     width: "30%",
     height: "auto",
