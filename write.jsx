@@ -1,18 +1,34 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { usePostContext } from "./postContext";
 
 export default function Write() {
   const navigate = useNavigate();
-  const [image, setImage] = useState(null);
+  const { id } = useParams();
+  const { posts, addPost, updatePost, deletePost } = usePostContext();
+
+  const isEdit = Boolean(id);
   const [tag, setTag] = useState("");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [image, setImage] = useState(null);
+
+  useEffect(() => {
+    if (isEdit) {
+      const post = posts.find((p) => p.id === Number(id));
+      if (post) {
+        setTag(post.tag);
+        setTitle(post.title);
+        setContent(post.content);
+        setImage(post.image);
+      }
+    }
+  }, [id, isEdit, posts]);
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
-      const imageURL = URL.createObjectURL(file);
-      setImage(imageURL);
+      setImage(URL.createObjectURL(file));
     }
   };
 
@@ -21,15 +37,22 @@ export default function Write() {
       alert("모든 내용을 입력해주세요!");
       return;
     }
-
-    console.log("저장된 데이터:", { tag, title, content, image });
-    alert("글이 저장되었습니다!");
+    if (isEdit) {
+      updatePost({ id: Number(id), tag, title, content, image });
+      alert("글이 수정되었습니다!");
+    } else {
+      addPost({ tag, title, content, image });
+      alert("글이 저장되었습니다!");
+    }
     navigate("/comm");
   };
 
   const handleDelete = () => {
-    alert("삭제되었습니다.");
-    navigate("/comm");
+    if (isEdit) {
+      deletePost(Number(id));
+      alert("삭제되었습니다.");
+      navigate("/comm");
+    }
   };
 
   return (
@@ -45,7 +68,7 @@ export default function Write() {
           style={{ ...styles.logo, cursor: "pointer" }}
           onClick={() => navigate("/")}
         >
-          🌱 이게모헤어~?
+          🌱 이것모헤어~?
         </div>
         <div style={styles.menuIcon}>
           <div style={styles.bar}></div>
@@ -54,7 +77,7 @@ export default function Write() {
         </div>
       </header>
 
-      <h2 style={styles.title}>글쓰기</h2>
+      <h2 style={styles.title}>{isEdit ? "글 수정" : "글쓰기"}</h2>
 
       <form style={styles.form}>
         <div style={styles.topRight}>
@@ -63,64 +86,57 @@ export default function Write() {
           </button>
         </div>
 
-        <label style={styles.label}>태그</label>
-        <input
-          style={styles.input}
-          type="text"
-          value={tag}
-          onChange={(e) => setTag(e.target.value)}
-        />
+        <div style={styles.inputBlock}>
+          <label style={styles.label}>
+            태그
+            <input
+              style={styles.input}
+              type="text"
+              value={tag}
+              onChange={(e) => setTag(e.target.value)}
+            />
+          </label>
 
-        <label style={styles.label}>제목</label>
-        <input
-          style={styles.input}
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
+          <label style={styles.label}>
+            제목
+            <input
+              style={styles.input}
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+          </label>
 
-        <label style={styles.label}>내용</label>
-        <textarea
-          style={styles.textarea}
-          placeholder="내용을 입력하세요"
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-        />
+          <label style={styles.label}>
+            내용
+            <textarea
+              style={styles.textarea}
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+            />
+          </label>
 
-        <label style={styles.label}>이미지</label>
-        <input
-          style={styles.imagebox}
-          type="file"
-          accept="image/*"
-          onChange={handleImageUpload}
-        />
+          <label style={styles.label}>
+            이미지
+            <input
+              style={styles.imagebox}
+              type="file"
+              accept="image/*"
+              onChange={handleImageUpload}
+            />
+          </label>
+        </div>
 
         {image && (
           <img
             src={image}
             alt="업로드된 사진"
-            style={{ marginTop: "10px", width: "100%", borderRadius: "10px" }}
+            style={{ marginTop: "10px", width: "50%", borderRadius: "10px" }}
           />
         )}
 
-        <div style={styles.bottomRow}>
-          <div style={styles.rightBtns}>
-            <button
-              type="button"
-              style={styles.bottomBtn}
-              onClick={() => navigate("/comm")}
-            >
-              목록
-            </button>
-
-            <button
-              type="button"
-              style={styles.bottomBtn}
-              onClick={() => alert("수정 기능은 추후 구현 예정입니다.")}
-            >
-              수정
-            </button>
-
+        {isEdit && (
+          <div style={styles.bottomRow}>
             <button
               type="button"
               style={styles.bottomBtn}
@@ -129,7 +145,7 @@ export default function Write() {
               삭제
             </button>
           </div>
-        </div>
+        )}
       </form>
     </div>
   );
@@ -138,11 +154,11 @@ export default function Write() {
 const styles = {
   container: {
     fontWeight: "bold",
-    backgroundColor: "#ccc",
-    height: "100vh",
+    backgroundColor: "#D9D9D9",
     padding: "30px",
     fontFamily: "sans-serif",
     boxSizing: "border-box",
+    minHeight: "100vh", // ✅ 화면 전체 높이를 채워 회색으로 고정
   },
   header: {
     display: "flex",
@@ -181,7 +197,6 @@ const styles = {
     marginBottom: "20px",
   },
   form: {
-    backgroundColor: "#e0e0e0",
     padding: "20px",
     borderRadius: "10px",
   },
@@ -202,31 +217,32 @@ const styles = {
   },
   label: {
     fontWeight: "bold",
-    display: "block",
-    marginBottom: "5px",
+    display: "flex",
+    flexDirection: "column",
+    marginBottom: "15px",
   },
   input: {
     width: "98%",
     padding: "10px",
-    marginBottom: "15px",
+    marginTop: "5px",
+    border: "none",
+    borderRadius: "6px",
+  },
+  textarea: {
+    width: "98%",
+    height: "100px",
+    marginTop: "5px",
+    padding: "10px",
     border: "none",
     borderRadius: "6px",
   },
   imagebox: {
     backgroundColor: "#fff",
     borderRadius: "6px",
-    width: "98%",
+    width: "30%",
     height: "auto",
     padding: "10px",
-    marginBottom: "20px",
-  },
-  textarea: {
-    width: "98%",
-    height: "100px",
-    marginBottom: "15px",
-    padding: "10px",
-    border: "none",
-    borderRadius: "6px",
+    marginTop: "5px",
   },
   bottomRow: {
     display: "flex",
