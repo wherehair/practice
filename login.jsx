@@ -80,7 +80,7 @@ const styles = {
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: "20px",
-    position: "relative", 
+    position: "relative",
   },
   backIcon: {
     width: "35px",
