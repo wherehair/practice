@@ -1,8 +1,14 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function Result() {
   const navigate = useNavigate();
+  const { state } = useLocation();
+  const image = state?.image;
+
+  // 🔁 실제 AI 결과 이미지는 나중에 동적으로 대체 가능
+  const aiImage =
+    "https://images.unsplash.com/photo-1611570183516-bcb4b829d34e?auto=format&fit=crop&w=600&q=80";
 
   return (
     <div style={styles.container}>
@@ -30,23 +36,24 @@ export default function Result() {
 
       <div style={styles.imageRow}>
         <div style={styles.imageBox}>
-          <p>내 탈모 사진</p>
+          <p style={styles.label}>내 탈모 사진</p>
+          {image ? (
+            <img src={image} alt="업로드된 사진" style={styles.image} />
+          ) : (
+            <p>사진 없음</p>
+          )}
         </div>
-        <div style={styles.imageBox}>
-          <p>비교 사진</p>
-        </div>
-      </div>
 
-      <div style={styles.descriptionBox}>
-        <p>
-          탈모 유형은 M자형이며, 초기 단계로 판단됩니다. 지속적인 관리가
-          필요합니다.
-        </p>
+        <div style={styles.imageBox}>
+          <p style={styles.label}>AI 유사 사례</p>
+          <img src={aiImage} alt="AI 판단 이미지" style={styles.image} />
+        </div>
       </div>
 
       <div style={styles.buttonRow}>
-        <button style={styles.button}>저장</button>
-        <button style={styles.button}>삭제</button>
+        <button style={styles.button} onClick={() => navigate("/")}>
+          저장하기
+        </button>
       </div>
     </div>
   );
@@ -54,19 +61,16 @@ export default function Result() {
 
 const styles = {
   container: {
-    fontWeight: "bold",
     backgroundColor: "#ccc",
-    height: "100vh",
+    minHeight: "100vh",
     padding: "30px",
     fontFamily: "sans-serif",
-    boxSizing: "border-box",
   },
   header: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: "20px",
-    position: "relative", 
+    marginBottom: "30px",
   },
   backIcon: {
     width: "35px",
@@ -100,41 +104,41 @@ const styles = {
     justifyContent: "center",
     gap: "40px",
     marginBottom: "30px",
+    flexWrap: "wrap",
   },
   imageBox: {
     backgroundColor: "#e0e0e0",
-    width: "220px",
-    height: "220px",
+    width: "300px",
+    height: "350px",
     borderRadius: "12px",
     display: "flex",
+    flexDirection: "column",
     alignItems: "center",
-    justifyContent: "center",
-    fontWeight: "bold",
-    fontSize: "16px",
+    padding: "10px",
   },
-  descriptionBox: {
-    backgroundColor: "#e0e0e0",
-    borderRadius: "12px",
-    height: "120px",
-    padding: "15px",
-    marginBottom: "30px",
-    fontSize: "16px",
+  label: {
     fontWeight: "bold",
-    display: "flex",
-    alignItems: "center",
+    fontSize: "18px",
+    marginBottom: "10px",
+  },
+  image: {
+    width: "100%",
+    height: "auto",
+    borderRadius: "8px",
+    objectFit: "cover",
   },
   buttonRow: {
     display: "flex",
     justifyContent: "center",
-    gap: "30px",
+    gap: "20px",
   },
   button: {
-    padding: "8px 20px",
-    borderRadius: "8px",
-    border: "none",
-    backgroundColor: "#f0f0f0",
+    padding: "10px 24px",
+    fontSize: "16px",
     fontWeight: "bold",
-    fontSize: "18px",
+    backgroundColor: "#f0f0f0",
+    border: "none",
+    borderRadius: "6px",
     cursor: "pointer",
   },
 };
