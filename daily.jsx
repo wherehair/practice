@@ -1,32 +1,23 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import mainLogo from "./mainlogo_img.png"; // ✅ PNG 이미지 import
 
-export default function Main() {
+export default function Daily() {
   const navigate = useNavigate();
-
-  const handleClick = (page) => {
-    if (page === "로그인") navigate("/login");
-    else if (page === "프로필") navigate("/home");
-    else if (page === "커뮤니티") navigate("/comm");
-    else if (page === "일지") navigate("/daily");
-    else if (page === "탈모 테스트") navigate("/test");
-    else if (page === "설문 조사") navigate("/survey");
-    else alert(`${page} 페이지는 아직 연결되지 않았어요.`);
-  };
-
   return (
     <div style={styles.container}>
       <header style={styles.header}>
-        <img src={mainLogo} alt="logo" style={styles.icon} />
-
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/109/109618.png"
+          alt="back"
+          style={styles.backIcon}
+          onClick={() => navigate(-1)}
+        />
         <div
           style={{ ...styles.logo, cursor: "pointer" }}
           onClick={() => navigate("/")}
         >
           🌱 이게모헤어~?
         </div>
-
         <div style={styles.menuIcon}>
           <div style={styles.bar}></div>
           <div style={styles.bar}></div>
@@ -34,58 +25,49 @@ export default function Main() {
         </div>
       </header>
 
-      <main style={styles.main}>
-        <button
-          style={styles.mainButton}
-          onClick={() => handleClick("탈모 테스트")}
-        >
-          탈모 테스트
-        </button>
-        <div style={styles.buttonRow}>
-          <button style={styles.button} onClick={() => handleClick("커뮤니티")}>
-            커뮤니티
-          </button>
-          <button style={styles.button} onClick={() => handleClick("일지")}>
-            일지
-          </button>
-        </div>
-        <div style={styles.buttonRow}>
-          <button style={styles.button} onClick={() => handleClick("로그인")}>
-            로그인
-          </button>
-          <button style={styles.button} onClick={() => handleClick("프로필")}>
-            프로필
-          </button>
-        </div>
-      </main>
+      <h2 style={styles.title}>일지</h2>
+
+      <div style={styles.entry}>
+        <div style={styles.date}>0월 0일</div>
+        <div style={styles.box}></div>
+        <div style={styles.label}>결과</div>
+        <div style={styles.box}></div>
+      </div>
+
+      <div style={styles.entry}>
+        <div style={styles.date}>0월 0일</div>
+        <div style={styles.box}></div>
+        <div style={styles.label}>결과</div>
+        <div style={styles.box}></div>
+      </div>
     </div>
   );
 }
 
 const styles = {
   container: {
-    fontFamily: "sans-serif",
+    fontWeight: "bold",
     backgroundColor: "#ccc",
     height: "100vh",
-    padding: "20px",
+    padding: "30px",
+    fontFamily: "sans-serif",
     boxSizing: "border-box",
   },
   header: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: "80px",
+    marginBottom: "20px",
+    position: "relative", 
   },
-  icon: {
-    width: "50px",
-    height: "50px",
-    borderRadius: "50%",
-    objectFit: "cover",
+  backIcon: {
+    width: "35px",
+    height: "35px",
+    cursor: "pointer",
   },
   logo: {
     fontSize: "35px",
     fontWeight: "bold",
-    textAlign: "center",
   },
   menuIcon: {
     display: "flex",
@@ -94,41 +76,35 @@ const styles = {
   },
   bar: {
     width: "30px",
-    height: "5px",
+    height: "4px",
     backgroundColor: "#000",
     borderRadius: "4px",
   },
-  main: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    gap: "20px",
+  title: {
+    textAlign: "center",
+    fontSize: "28px",
+    fontWeight: "bold",
+    marginBottom: "20px",
   },
-  mainButton: {
-    width: "300px",
-    height: "70px",
-    padding: "20px 50px",
-    fontSize: "23px",
+  entry: {
+    marginBottom: "30px",
+  },
+  date: {
     fontWeight: "bold",
     backgroundColor: "#e0e0e0",
-    border: "none",
-    borderRadius: "10px",
-    cursor: "pointer",
-
+    display: "inline-block",
+    padding: "4px 8px",
+    borderRadius: "5px",
+    marginBottom: "8px",
   },
-  buttonRow: {
-    display: "flex",
-    gap: "20px",
-  },
-  button: {
-    width: "140px",
-    height: "70px",
-    padding: "15px 25px",
-    fontSize: "23px",
+  label: {
     fontWeight: "bold",
+    marginTop: "10px",
+    marginBottom: "5px",
+  },
+  box: {
     backgroundColor: "#e0e0e0",
-    border: "none",
+    height: "100px",
     borderRadius: "10px",
-    cursor: "pointer",
   },
 };
