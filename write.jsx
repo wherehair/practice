@@ -4,6 +4,9 @@ import { useNavigate } from "react-router-dom";
 export default function Write() {
   const navigate = useNavigate();
   const [image, setImage] = useState(null);
+  const [tag, setTag] = useState("");
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
@@ -11,6 +14,22 @@ export default function Write() {
       const imageURL = URL.createObjectURL(file);
       setImage(imageURL);
     }
+  };
+
+  const handleSubmit = () => {
+    if (!tag || !title || !content) {
+      alert("모든 내용을 입력해주세요!");
+      return;
+    }
+
+    console.log("저장된 데이터:", { tag, title, content, image });
+    alert("글이 저장되었습니다!");
+    navigate("/comm");
+  };
+
+  const handleDelete = () => {
+    alert("삭제되었습니다.");
+    navigate("/comm");
   };
 
   return (
@@ -39,19 +58,34 @@ export default function Write() {
 
       <form style={styles.form}>
         <div style={styles.topRight}>
-          <button type="button" style={styles.submitBtn}>
+          <button type="button" style={styles.submitBtn} onClick={handleSubmit}>
             완료
           </button>
         </div>
 
         <label style={styles.label}>태그</label>
-        <input style={styles.input} type="text" />
+        <input
+          style={styles.input}
+          type="text"
+          value={tag}
+          onChange={(e) => setTag(e.target.value)}
+        />
 
         <label style={styles.label}>제목</label>
-        <input style={styles.input} type="text" />
+        <input
+          style={styles.input}
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
 
         <label style={styles.label}>내용</label>
-        <textarea style={styles.textarea} placeholder="내용을 입력하세요" />
+        <textarea
+          style={styles.textarea}
+          placeholder="내용을 입력하세요"
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+        />
 
         <label style={styles.label}>이미지</label>
         <input
@@ -78,10 +112,20 @@ export default function Write() {
             >
               목록
             </button>
-            <button type="button" style={styles.bottomBtn}>
+
+            <button
+              type="button"
+              style={styles.bottomBtn}
+              onClick={() => alert("수정 기능은 추후 구현 예정입니다.")}
+            >
               수정
             </button>
-            <button type="button" style={styles.bottomBtn}>
+
+            <button
+              type="button"
+              style={styles.bottomBtn}
+              onClick={handleDelete}
+            >
               삭제
             </button>
           </div>
