@@ -1,8 +1,29 @@
-import React from "react";
+import React, { useState, useRef, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { ProfileContext } from "./profileContext";
+
 
 export default function Home() {
   const navigate = useNavigate();
+  const fileInputRef = useRef(null);
+  const { profileImage, setProfileImage } = useContext(ProfileContext); // ✅ 반드시 함수 안에서 선언
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const handleImageClick = () => {
+    fileInputRef.current.click();
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setProfileImage(URL.createObjectURL(file));
+    }
+  };
+  const handleLogout = () => {
+    localStorage.removeItem("signupData");
+    alert("로그아웃 되었습니다.");
+    navigate("/login");
+  };
   return (
     <div style={styles.container}>
       <header style={styles.header}>
@@ -19,16 +40,56 @@ export default function Home() {
           🌱 이게모헤어~?
         </div>
         <div style={styles.menuIcon}>
-          <div style={styles.bar}></div>
-          <div style={styles.bar}></div>
-          <div style={styles.bar}></div>
+          <div style={styles.face} onClick={() => setDropdownOpen(!dropdownOpen)}>
+            {profileImage ? (
+              <img
+                src={profileImage}
+                alt="profile"
+                style={{ width: "100%", height: "100%", borderRadius: "100%" }}
+              />
+            ) : (
+              "🙂"
+            )}
+          </div>
+
+          {dropdownOpen && (
+            <div style={styles.dropdown}>
+              <div style={styles.menuItem} onClick={() => navigate("/home")}>
+                프로필 보기
+              </div>
+              <div style={styles.menuItem} onClick={() => navigate("/home")}>
+                프로필 수정
+              </div>
+              <div style={styles.menuItem} onClick={handleLogout}>
+                로그아웃
+              </div>
+            </div>
+          )}
         </div>
       </header>
 
       <h2 style={styles.title}>프로필</h2>
 
       <div style={styles.profileArea}>
-        <div style={styles.face}>🙂</div>
+        <div style={styles.bigface} onClick={handleImageClick}>
+          {profileImage ? (
+            <img
+              src={profileImage}
+              alt="profile"
+              style={{ width: "100%", height: "100%", borderRadius: "100%" }}
+            />
+          ) : (
+            "🙂"
+          )}
+        </div>
+        <input
+          type="file"
+          accept="image/*"
+          ref={fileInputRef}
+          style={{ display: "none" }}
+          onChange={handleFileChange}
+        />
+
         <div style={styles.form}>
           <div style={styles.row}>
             <label style={styles.label}>ID</label>
@@ -100,7 +161,7 @@ const styles = {
     justifyContent: "center",
     gap: "50px",
   },
-  face: {
+  bigface:{
     width: "160px",
     height: "160px",
     backgroundColor: "#eee",
@@ -110,6 +171,40 @@ const styles = {
     justifyContent: "center",
     fontSize: "70px",
   },
+  face: {
+    width: "50px",
+    height: "50px",
+    borderRadius: "100%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontSize: "28px",
+    backgroundColor: "#eee",
+    cursor: "pointer",
+  },
+  dropdown: {
+    position: "absolute",
+    top: "60px",
+    right: "0px",
+    backgroundColor: "#fff",
+    boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
+    borderRadius: "8px",
+    overflow: "hidden",
+    zIndex: 1,
+    display: "flex",
+    flexDirection: "column", 
+    alignItems: "stretch",  
+},
+  menuItem: {
+    width: "100px",
+    padding: "12px 20px",
+    cursor: "pointer",
+    fontWeight: "bold",
+    borderBottom: "1px solid #eee",
+    backgroundColor: "#fff",
+    textAlign: "center",      
+    transition: "background 0.2s",
+},
   form: {
     display: "flex",
     flexDirection: "column",
