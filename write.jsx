@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { ProfileContext } from "./profileContext";
 import { useNavigate, useParams } from "react-router-dom";
 import { usePostContext } from "./postContext";
 
 export default function Write() {
   const navigate = useNavigate();
+  const { profileImage } = useContext(ProfileContext);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const { id } = useParams();
   const { posts, addPost, updatePost, deletePost } = usePostContext();
 
@@ -55,6 +58,12 @@ export default function Write() {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("signupData");
+    alert("로그아웃 되었습니다.");
+    navigate("/login");
+  };
+
   return (
     <div style={styles.container}>
       <header style={styles.header}>
@@ -71,9 +80,31 @@ export default function Write() {
           🌱 이것모헤어~?
         </div>
         <div style={styles.menuIcon}>
-          <div style={styles.bar}></div>
-          <div style={styles.bar}></div>
-          <div style={styles.bar}></div>
+          <div style={styles.face} onClick={() => setDropdownOpen(!dropdownOpen)}>
+            {profileImage ? (
+              <img
+                src={profileImage}
+                alt="profile"
+                style={{ width: "100%", height: "100%", borderRadius: "100%" }}
+              />
+            ) : (
+              "🙂"
+            )}
+          </div>
+
+          {dropdownOpen && (
+            <div style={styles.dropdown}>
+              <div style={styles.menuItem} onClick={() => navigate("/home")}>
+                프로필 보기
+              </div>
+              <div style={styles.menuItem} onClick={() => navigate("/home")}>
+                프로필 수정
+              </div>
+              <div style={styles.menuItem} onClick={handleLogout}>
+                로그아웃
+              </div>
+            </div>
+          )}
         </div>
       </header>
 
@@ -264,4 +295,38 @@ const styles = {
     display: "flex",
     gap: "5px",
   },
+  face: {
+    width: "50px",
+    height: "50px",
+    borderRadius: "100%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontSize: "28px",
+    backgroundColor: "#eee",
+    cursor: "pointer",
+  },
+  dropdown: {
+    position: "absolute",
+    top: "60px",
+    right: "0px",
+    backgroundColor: "#fff",
+    boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
+    borderRadius: "8px",
+    overflow: "hidden",
+    zIndex: 1,
+    display: "flex",
+    flexDirection: "column", 
+    alignItems: "stretch",  
+},
+  menuItem: {
+    width: "100px",
+    padding: "12px 20px",
+    cursor: "pointer",
+    fontWeight: "bold",
+    borderBottom: "1px solid #eee",
+    backgroundColor: "#fff",
+    textAlign: "center",      
+    transition: "background 0.2s",
+},
 };
