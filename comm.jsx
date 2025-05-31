@@ -1,16 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { usePostContext } from "./postContext";
+import { ProfileContext } from "./profileContext";
 
 export default function Comm() {
   const navigate = useNavigate();
   const { posts } = usePostContext();
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
+  const { profileImage } = useContext(ProfileContext);
+  const [dropdownOpen, setDropdownOpen] = useState(false); // 🔹 드롭다운 상태
 
   const postsPerPage = 5;
 
-  // ✅ 필터링된 게시글
   const filteredPosts = posts.filter((post) =>
     post.tag.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -26,6 +28,11 @@ export default function Comm() {
     if (e.key === "Enter") {
       setCurrentPage(1); // 검색 시 1페이지로 초기화
     }
+  };
+  const handleLogout = () => {
+    localStorage.removeItem("signupData");
+    alert("로그아웃 되었습니다.");
+    navigate("/login");
   };
 
   return (
@@ -44,9 +51,31 @@ export default function Comm() {
           🌱 이것모헤어~?
         </div>
         <div style={styles.menuIcon}>
-          <div style={styles.bar}></div>
-          <div style={styles.bar}></div>
-          <div style={styles.bar}></div>
+          <div style={styles.face} onClick={() => setDropdownOpen(!dropdownOpen)}>
+            {profileImage ? (
+              <img
+                src={profileImage}
+                alt="profile"
+                style={{ width: "100%", height: "100%", borderRadius: "100%", objectFit: "cover"}}
+              />
+            ) : (
+              "🙂"
+            )}
+          </div>
+
+          {dropdownOpen && (
+            <div style={styles.dropdown}>
+              <div style={styles.menuItem} onClick={() => navigate("/home")}>
+                프로필 보기
+              </div>
+              <div style={styles.menuItem} onClick={() => navigate("/home")}>
+                프로필 수정
+              </div>
+              <div style={styles.menuItem} onClick={handleLogout}>
+                로그아웃
+              </div>
+            </div>
+          )}
         </div>
       </header>
 
@@ -199,4 +228,38 @@ const styles = {
     cursor: "pointer",
     margin: "0 10px",
   },
+  face: {
+    width: "50px",
+    height: "50px",
+    borderRadius: "100%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontSize: "28px",
+    backgroundColor: "#eee",
+    cursor: "pointer",
+  },
+  dropdown: {
+    position: "absolute",
+    top: "60px",
+    right: "0px",
+    backgroundColor: "#fff",
+    boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
+    borderRadius: "8px",
+    overflow: "hidden",
+    zIndex: 1,
+    display: "flex",
+    flexDirection: "column", 
+    alignItems: "stretch",  
+},
+  menuItem: {
+    width: "100px",
+    padding: "12px 20px",
+    cursor: "pointer",
+    fontWeight: "bold",
+    borderBottom: "1px solid #eee",
+    backgroundColor: "#fff",
+    textAlign: "center",      
+    transition: "background 0.2s",
+},
 };
