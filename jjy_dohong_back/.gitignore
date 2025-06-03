@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+*.log
+
+# Django
+db.sqlite3
+*.pot
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+
+# Virtual Environments
+venv/
+ENV/
+
+# VSCode
+.vscode/
+
+# 기타
+*.zip
+*.tmp
+*.bak
