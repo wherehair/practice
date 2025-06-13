@@ -41,10 +41,10 @@ export default function Write() {
       return;
     }
     if (isEdit) {
-      updatePost({ id: Number(id), tag, title, content, image });
+      updatePost({ id: Number(id), tag, title, content, image, author: "currentUser" });
       alert("글이 수정되었습니다!");
     } else {
-      addPost({ tag, title, content, image });
+      addPost({ tag, title, content, image, author: "currentUser" });
       alert("글이 저장되었습니다!");
     }
     navigate("/comm");
